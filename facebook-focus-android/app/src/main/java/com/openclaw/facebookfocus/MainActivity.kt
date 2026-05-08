@@ -28,11 +28,12 @@ private const val TAB_POST = 4
 
 private const val HOME_URL = "https://m.facebook.com/messages"
 private const val MESSAGES_URL = "https://www.facebook.com/messages/"
+private const val MARKETPLACE_URL = "https://www.facebook.com/marketplace/"
 private const val DESKTOP_USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
 private val TAB_URLS = mapOf(
     TAB_MESSAGES to MESSAGES_URL,
     TAB_NOTIFICATIONS to "https://m.facebook.com/notifications.php",
-    TAB_MARKETPLACE to "https://m.facebook.com/marketplace",
+    TAB_MARKETPLACE to MARKETPLACE_URL,
 )
 
 class MainActivity : AppCompatActivity() {
@@ -141,7 +142,6 @@ class MainActivity : AppCompatActivity() {
             addView(
                 webView,
                 FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT).apply {
-                    topMargin = dp(56)
                     bottomMargin = dp(64)
                 }
             )
@@ -173,7 +173,7 @@ class MainActivity : AppCompatActivity() {
             showComposer()
         } else {
             topBar.visibility = View.VISIBLE
-            if (tabId == TAB_MESSAGES) {
+            if (tabId == TAB_MESSAGES || tabId == TAB_MARKETPLACE) {
                 messagesMode = 0
                 webView.settings.userAgentString = DESKTOP_USER_AGENT
             } else {
@@ -189,7 +189,7 @@ class MainActivity : AppCompatActivity() {
             return
         }
         topBar.visibility = View.VISIBLE
-        if (currentTab == TAB_MESSAGES) {
+        if (currentTab == TAB_MESSAGES || currentTab == TAB_MARKETPLACE) {
             messagesMode = 0
             webView.settings.userAgentString = DESKTOP_USER_AGENT
         }
@@ -217,6 +217,12 @@ class MainActivity : AppCompatActivity() {
     private fun isMessengerDownload(url: String): Boolean {
         val lower = url.lowercase()
         return lower.contains("messenger.com/download") || lower.contains("download-messenger") || lower.startsWith("fb-messenger://") || lower.startsWith("intent://") || lower.contains("play.google.com/store/apps/details?id=com.facebook.orca")
+    }
+
+    private fun openDesktopMessages(view: WebView?) {
+        messagesMode = 1
+        view?.settings?.userAgentString = DESKTOP_USER_AGENT
+        view?.loadUrl(MESSAGES_URL)
     }
 
     private fun showMessagesFallback() {
@@ -329,10 +335,8 @@ class MainActivity : AppCompatActivity() {
         override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
             val url = request?.url?.toString() ?: return false
             if (isMessengerDownload(url)) {
-                if (currentTab == TAB_MESSAGES && messagesMode == 0) {
-                    messagesMode = 1
-                    view?.settings?.userAgentString = DESKTOP_USER_AGENT
-                    view?.loadUrl(MESSAGES_URL)
+                if ((currentTab == TAB_MESSAGES || currentTab == TAB_MARKETPLACE) && messagesMode == 0) {
+                    openDesktopMessages(view)
                 } else {
                     showMessagesFallback()
                 }
@@ -352,10 +356,8 @@ class MainActivity : AppCompatActivity() {
             error: WebResourceError,
         ) {
             if (request.isForMainFrame) {
-                if (currentTab == TAB_MESSAGES && messagesMode == 0) {
-                    messagesMode = 1
-                    view.settings.userAgentString = DESKTOP_USER_AGENT
-                    view.loadUrl(MESSAGES_URL)
+                if ((currentTab == TAB_MESSAGES || currentTab == TAB_MARKETPLACE) && messagesMode == 0) {
+                    openDesktopMessages(view)
                 } else {
                     showMessagesFallback()
                 }
@@ -368,10 +370,8 @@ class MainActivity : AppCompatActivity() {
             errorResponse: WebResourceResponse,
         ) {
             if (request.isForMainFrame) {
-                if (currentTab == TAB_MESSAGES && messagesMode == 0) {
-                    messagesMode = 1
-                    view.settings.userAgentString = DESKTOP_USER_AGENT
-                    view.loadUrl(MESSAGES_URL)
+                if ((currentTab == TAB_MESSAGES || currentTab == TAB_MARKETPLACE) && messagesMode == 0) {
+                    openDesktopMessages(view)
                 } else {
                     showMessagesFallback()
                 }
