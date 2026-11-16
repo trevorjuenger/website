@@ -3,6 +3,9 @@
 
 .mir6-logo { display: block; margin: 1.5rem 0 1rem; max-width: 70%; }
 .mir6-logo img { display: block; width: 100%; height: auto; }
+.gallery-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+.gallery-grid img { width: 100%; height: 15rem; object-fit: cover; border-radius: 0.25rem; }
+@media screen and (max-width: 480px) { .gallery-grid { grid-template-columns: 1fr; } }
 
 /*
 	Dimension by HTML5 UP
