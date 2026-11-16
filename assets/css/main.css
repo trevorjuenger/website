@@ -1,6 +1,9 @@
 @import url(fontawesome-all.min.css);
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300italic,600italic,300,600");
 
+.mir6-logo { display: block; margin: 1.5rem 0 1rem; max-width: 70%; }
+.mir6-logo img { display: block; width: 100%; height: auto; }
+
 /*
 	Dimension by HTML5 UP
 	html5up.net | @ajlkn
