@@ -1662,3 +1662,6 @@ input, select, textarea {
 		body.is-preload #footer {
 			opacity: 0;
 		}
+
+/* Portfolio refinements */
+#header .logo img{display:block;width:100%;height:100%;object-fit:contain;border-radius:50%}#header .logo{overflow:hidden;padding:0.35rem;background:#111}#header nav ul li a{font-size:.72rem;padding:0 1rem;letter-spacing:.08em}.gallery-grid a{border-bottom:0}.gallery-grid img{cursor:zoom-in;transition:transform .2s ease}.gallery-grid a:hover img{transform:scale(1.02)}.gallery-grid{grid-template-columns:repeat(3,minmax(0,1fr))}@media screen and (max-width:736px){#header nav ul li a{font-size:.62rem;padding:0 .65rem}.gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media screen and (max-width:480px){.gallery-grid{grid-template-columns:1fr}}
