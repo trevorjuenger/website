@@ -1,0 +1,28 @@
+@import url(fontawesome-all.min.css);
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,600");
+
+* { box-sizing: border-box; }
+html { background: #1b1f22; color: #fff; font-family: "Source Sans Pro", sans-serif; }
+body { margin: 0; min-height: 100vh; background: linear-gradient(rgba(16,19,21,.8), rgba(16,19,21,.92)), url("../../images/dimension-bg.jpg") center / cover fixed; }
+a { color: inherit; text-decoration: none; border-bottom: 1px dotted rgba(255,255,255,.55); }
+a:hover { border-bottom-color: transparent; }
+a:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
+img { display: block; max-width: 100%; }
+.site-nav { display: flex; justify-content: space-between; align-items: center; gap: 1rem; width: min(1080px, calc(100% - 2rem)); margin: 0 auto; padding: 1.25rem 0; }
+.site-nav strong { text-transform: uppercase; letter-spacing: .18rem; }
+.site-nav div { display: flex; gap: 1rem; }
+.film-page { display: grid; grid-template-columns: minmax(260px, .75fr) minmax(0, 1.25fr); gap: clamp(2rem, 6vw, 5rem); align-items: center; width: min(1080px, calc(100% - 2rem)); margin: 2rem auto 5rem; padding: clamp(1.25rem, 4vw, 3rem); border: 1px solid rgba(255,255,255,.25); background: rgba(27,31,34,.88); }
+.film-art img { width: 100%; max-height: 72vh; object-fit: contain; }
+.film-copy h1 { margin: 0 0 .5rem; font-size: clamp(2.2rem, 6vw, 5rem); line-height: 1; letter-spacing: .08rem; text-transform: uppercase; }
+.meta { opacity: .72; letter-spacing: .1rem; text-transform: uppercase; }
+.synopsis { font-size: 1.14rem; line-height: 1.7; }
+.watch-links { display: flex; flex-wrap: wrap; gap: .75rem; margin: 2rem 0; }
+.watch-links a { padding: .65rem .9rem; border: 1px solid #fff; border-radius: .2rem; text-transform: uppercase; letter-spacing: .08rem; font-size: .78rem; font-weight: 600; }
+.watch-links a:hover { background: #fff; color: #1b1f22; }
+.secondary { opacity: .8; }
+@media (max-width: 720px) {
+  .site-nav { align-items: flex-start; }
+  .site-nav div { flex-direction: column; gap: .4rem; text-align: right; }
+  .film-page { grid-template-columns: 1fr; margin-top: .5rem; }
+  .film-art img { max-height: 58vh; }
+}
